@@ -169,6 +169,8 @@ class Model(object):
 
 def train(train_data, vocabulary, num_layers, num_epochs, batch_size, model_save_name,
           learning_rate=1.0, max_lr_epoch=10, lr_decay=0.93, print_iter=50):
+    # Clear computational graph
+    tf.reset_default_graph()
     # setup data and models
     training_input = Input(batch_size=batch_size, num_steps=35, data=train_data)
     m = Model(training_input, is_training=True, hidden_size=650, vocab_size=vocabulary,
@@ -211,6 +213,8 @@ def train(train_data, vocabulary, num_layers, num_epochs, batch_size, model_save
 
 
 def test(model_path, test_data, reversed_dictionary):
+    # Clear computational graph
+    tf.reset_default_graph()
     test_input = Input(batch_size=20, num_steps=35, data=test_data)
     m = Model(test_input, is_training=False, hidden_size=650, vocab_size=vocabulary,
               num_layers=2)
